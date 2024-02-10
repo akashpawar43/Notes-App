@@ -9,9 +9,10 @@
 Here're some of the project's best features:
 
 *   Login
-*   Register
-*   Add Notes
-*   Update Notes
+*   SignUp
+*   Add Note
+*   Get Notes
+*   Update Note
 *   Delete Note
 
 <h2>🛠️ Installation Steps:</h2>
@@ -59,3 +60,4 @@ Technologies used in the project:
 *   HTML
 *   Tailwind CSS
 *   JavaScript
+*   React-Icons
