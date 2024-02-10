@@ -5,6 +5,8 @@ import Home from './components/Home';
 import About from './components/About';
 import NoteState from './context/notes/NoteState';
 import Alert from './components/Alert';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 export default function App() {
   return (
@@ -14,9 +16,9 @@ export default function App() {
         <Alert message="Something happened that you should know about." />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/signin' element={<Home />} />
-          <Route path='/register' element={<Home />} />
           <Route path='/about' element={<About />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
         </Routes>
         <p className="text-center bg-gray-900 text-gray-500 py-4 text-xs">
           &copy;2020 Acme Corp. All rights reserved.

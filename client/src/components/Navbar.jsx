@@ -11,9 +11,9 @@ export default function Navbar() {
 
     const nav_items = [
         { name: "Home", link: "/" },
-        { name: "Sign In", link: "/signin" },
-        { name: "Register", link: "/register" },
         { name: "About", link: "/about" },
+        { name: "Log In", link: "/login" },
+        { name: "Sign up", link: "/signup" },
     ]
 
     return (

@@ -19,7 +19,7 @@ export default function Notes() {
 
     const handleClick = () => {
         setUp(!up);
-        console.log("Updating note: ", note);
+        // console.log("Updating note: ", note);
         editNote(note.id, note.etitle, note.edescription, note.etag);
     }
     const onChange = (e) => {
@@ -36,7 +36,7 @@ export default function Notes() {
                                     Terms of Service
                                 </h3>
                                 <button type="button"
-                                    onClick={handleClick}
+                                    onClick={() => setUp(!up)}
                                     className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
                                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -45,7 +45,7 @@ export default function Notes() {
                                 </button>
                             </div>
                             <div className="p-4 md:p-5 space-y-4">
-                                <form className=" pt-6 pb-8">
+                                <form className=" pt-6 pb-8" onSubmit={handleClick}>
                                     <div className="mb-4">
                                         <label className="block text-gray-400 text-sm font-bold mb-2" htmlFor="title">
                                             Title
@@ -57,6 +57,7 @@ export default function Notes() {
                                             type="text"
                                             onChange={onChange}
                                             value={note.etitle}
+                                            required
                                         />
                                     </div>
                                     <div className="mb-6">
@@ -64,12 +65,14 @@ export default function Notes() {
                                             Description
                                         </label>
                                         <input
-                                            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                             id="edescription"
                                             name="edescription"
                                             type="text"
                                             onChange={onChange}
                                             value={note.edescription}
+                                            minLength={5}
+                                            required
                                         />
                                         <p className="text-red-500 text-xs italic">Please choose a password.</p>
                                     </div>
@@ -89,8 +92,8 @@ export default function Notes() {
                                 </form>
                             </div>
                             <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                <button onClick={handleClick} data-modal-hide="default-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Note</button>
-                                <button onClick={updateNote} type="button" className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                                <button data-modal-hide="default-modal" type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Note</button>
+                                <button onClick={() => setUp(!up)} type="button" className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -100,9 +103,13 @@ export default function Notes() {
             <div className=" container m-auto text-white p-4 flex flex-col justify-center items-center gap-4">
                 <h1 className=" text-3xl font-bold">Your Notes</h1>
                 <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 w-full">
-                    {notes.map((note, i) => {
-                        return (<NoteItems key={i} updateNote={updateNote} note={note} />);
-                    })}
+                    {notes.length > 0 ?
+                        (notes.map((note, i) => {
+                            return (<NoteItems key={i} updateNote={updateNote} note={note} />);
+                        }))
+                        : 
+                        <p>There is no Note.</p>
+                    }
                 </div>
             </div>
         </>

@@ -25,7 +25,8 @@ router.post("/createuser", [
         // check if user is already exists 
         let user = await User.findOne({ email: req.body.email });
         if (user) {
-            return res.status(400).json({ error: "Sorry user with this email already exist" });
+            success = false
+            return res.status(400).json({ success, error: "Sorry user with this email already exist" });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -44,11 +45,12 @@ router.post("/createuser", [
         }
 
         const authToken = jwt.sign(data, JWT_SECRET);
-        res.json({ authToken });
+        success = true
+        res.json({ success, authToken });
 
     } catch (error) {
         console.error(error.message);
-        res.status(500).send({error : "Internal server error"});
+        res.status(500).send({ error: "Internal server error" });
     }
 })
 
@@ -68,11 +70,13 @@ router.post("/login", [
         const { email, password } = req.body;
         let user = await User.findOne({ email });
         if (!email) {
-            return res.status(400).json({ error: "Please try to login with correct creditentials" });
+            success = false
+            return res.status(400).json({ success, error: "Please try to login with correct creditentials" });
         }
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
-            return res.status(400).json({ error: "Please try to login with correct creditentials" });
+            success = false
+            return res.status(400).json({ success, error: "Please try to login with correct creditentials" });
         }
         const payload = {
             user: {
@@ -80,24 +84,26 @@ router.post("/login", [
             }
         }
         const authToken = jwt.sign(payload, JWT_SECRET);
-        res.json({ authToken })
+        success = true
+        res.json({ success, authToken })
 
     } catch (error) {
         console.error(error.message);
-        res.status(500).send({error : "Internal server error"});
+        res.status(500).send({ error: "Internal server error" });
     }
 
 })
 
 // ROUTE 3: Get logdedin User Details using: POST "/api/auth/getuser". login required 
-router.post("/getuser", fetchuser , async (req, res) => {
+router.post("/getuser", fetchuser, async (req, res) => {
     try {
         const userId = req.user.id;
         const user = await User.findById(userId).select("-password");
-        res.send(user)
+        success = true
+        res.send({ success, user })
     } catch (error) {
         console.log(error.message);
-        res.status(500).send({error : "Internal server error"});
+        res.status(500).send({ error: "Internal server error" });
     }
 
 })
