@@ -19,7 +19,7 @@ export default function NoteItems(props) {
                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{note.tag}</span>
             </div>
             <div className='flex flex-row gap-2 w-full justify-end cursor-pointer'>
-                <IoTrashBinOutline onClick={() => (deleteNote(note._id))} />
+                <IoTrashBinOutline onClick={() => { deleteNote(note._id); props.showAlert("Note Deleted Successfully", "teal") }} />
                 <FiEdit onClick={() => { updateNote(note) }} />
             </div>
         </div>
