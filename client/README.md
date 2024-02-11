@@ -1,8 +1,49 @@
-# React + Vite
+<h1 align="center" id="title">Notes</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p id="description">Notes app Build using MERN Stack. Allowing to Creating User's registration, Login, Adding Notes, Update and Delete Notes within app.</p>
 
-Currently, two official plugins are available:
+  
+  
+<h2>🧐 Features</h2>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Here're some of the project's best features:
+
+*   Login
+*   SignUp
+*   Add Note
+*   Get Notes
+*   Update Note
+*   Delete Note
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. Open Separate terminal for Client</p>
+
+<p>2. cd Client</p>
+
+<p>3. Install dependencies for Client</p>
+
+```
+npm install
+```
+
+<p>4. Run Client</p>
+
+```
+npm run dev
+```
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   ReactJs
+*   NodeJs
+*   Mongodb
+*   ExpressJS
+*   HTML
+*   Tailwind CSS
+*   JavaScript
+*   React-Icons
