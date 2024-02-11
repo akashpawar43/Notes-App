@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegNoteSticky } from "react-icons/fa6";
 import { FaNoteSticky } from "react-icons/fa6";
 
 export default function Navbar() {
     const [ham, setHam] = useState(false);
     const location = useLocation()
-
+    const navigate = useNavigate();
     const handleham = () => {
         setHam(!ham)
     }
@@ -16,6 +16,10 @@ export default function Navbar() {
         { name: "About", link: "/about" },
     ]
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login')
+    }
     return (
         <nav className="w-full bg-gray-800 text-white sticky top-0 drop-shadow-xl">
             <div className=" container mx-auto p-4 flex flex-col xl:flex-row justify-between items-center">
@@ -50,7 +54,7 @@ export default function Navbar() {
                         </>
                         :
                         <li>
-                            <Link className=" bg-gray-500 px-3 py-1 rounded-md">
+                            <Link to="/login" onClick={handleLogout} className=" bg-gray-500 px-3 py-1 rounded-md">
                                 <span className="hover:text-white text-white">Logout</span>
                             </Link>
                         </li>

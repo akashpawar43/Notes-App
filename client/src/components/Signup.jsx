@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Signup(props) {
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" })
@@ -16,9 +16,9 @@ export default function Signup(props) {
             body: JSON.stringify({ name, email, password })
         });
         const json = await response.json()
-        console.log(json);
+        // console.log(json);
         if (json.success) {
-            localStorage.setItem('token', json.authtoken);
+            localStorage.setItem('token', json.authToken);
             navigate('/')
             props.showAlert("account created Successfully", "teal")
         }
@@ -34,8 +34,8 @@ export default function Signup(props) {
         <main className=" bg-gray-900">
             <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
                 <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
-                    <h1 className="text-3xl font-semibold text-center text-purple-700 underline">
-                        Log in
+                    <h1 className="text-3xl font-semibold text-center text-purple-700">
+                        Sign up
                     </h1>
                     <form className="mt-6" onSubmit={handleSubmit}>
                         <div className="mb-2">
@@ -74,9 +74,9 @@ export default function Signup(props) {
                     <p className="mt-8 text-xs font-light text-center text-gray-700">
                         {" "}
                         Don't have an account?{" "}
-                        <a href="#" className="font-medium text-purple-600 hover:underline">
-                            Sign up
-                        </a>
+                        <Link to="/login" className="font-medium text-purple-600 hover:underline">
+                            log in
+                        </Link>
                     </p>
                 </div>
             </div>

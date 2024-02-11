@@ -15,7 +15,7 @@ router.post("/createuser", [
     body('password', 'Enter valid password').isLength({ min: 5 }),
 ], async (req, res) => {
     // If there is any errors, return Bad request and the errors 
-    console.log(req.body);
+    // console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
@@ -60,7 +60,7 @@ router.post("/login", [
     body('email', "Enter valid Email").isEmail(),
     body('password', "Pssword cannot be blank").exists(),
 ], async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.send.status(400).json({ errors: errors.array() });
